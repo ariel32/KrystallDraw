@@ -26,8 +26,8 @@ Enumeration
   #ButtonClass8
   #ButtonClass9
   #ButtonBackGround
-  #buttonEraze
-  #buttonErazeAll
+  #ButtonErase
+  #ButtonEraseAll
   
   
   #FrameInfo
@@ -50,9 +50,9 @@ Enumeration
   #trgImg
 EndEnumeration
 
-Procedure SquareCalc()
-image_id = LoadImage( #PB_Any, GetCurrentDirectory()+"maps\"+ReplaceString(GetFilePart(path),GetExtensionPart(path),"")+"map.png")
-Dim image_pixel_data.b( ImageWidth(image_id), ImageHeight(image_id) )
+Procedure AreaCalc()
+image_id = LoadImage(#PB_Any, GetCurrentDirectory()+"maps\"+ReplaceString(GetFilePart(path),GetExtensionPart(path),"")+"map.png")
+Dim image_pixel_data.b(ImageWidth(image_id), ImageHeight(image_id))
 
 StartDrawing(ImageOutput( image_id ) )
 
@@ -139,7 +139,7 @@ If OpenWindow(#Window_0, 0, 0, 220, 220, "KrystallDraw"+" v."+Str(#PB_Editor_Bui
   FrameGadget(#FrameOperation, imgW+20, 10, DesktopWidth(0)-imgW-30, 100, "Операции")
   ButtonGadget(#ButtonOpenImage, imgW+30, 40, 110, 30, "Открыть") 
   ButtonGadget(#buttonSave, imgW+140, 40, 110, 30, "Сохранить")
-  ButtonGadget(#buttonErazeAll, imgW+30, 70, 110, 30, "Стереть все")
+  ButtonGadget(#ButtonEraseAll, imgW+30, 70, 110, 30, "Очистить")
   
   FrameGadget(#FrameInfo, imgW+20, 120, DesktopWidth(0)-imgW-30, 400, "Инфо")
   ButtonGadget(#ButtonClass1, imgW+30, 150, 150, 30, "Класс 1") : StringGadget(#StringClass1, imgW+190, 150, 220, 30,"",#PB_String_ReadOnly)
@@ -152,7 +152,7 @@ If OpenWindow(#Window_0, 0, 0, 220, 220, "KrystallDraw"+" v."+Str(#PB_Editor_Bui
   ButtonGadget(#ButtonClass8, imgW+30, 360, 150, 30, "Класс 8") : StringGadget(#StringClass8, imgW+190, 360, 220, 30,"",#PB_String_ReadOnly)
   ButtonGadget(#ButtonClass9, imgW+30, 390, 150, 30, "Класс 9") : StringGadget(#StringClass9, imgW+190, 390, 220, 30,"",#PB_String_ReadOnly)
   ButtonGadget(#ButtonBackGround, imgW+30, 420, 150, 30, "Фон") : StringGadget(#StringBackGround, imgW+190, 420, 220, 30,"",#PB_String_ReadOnly)
-  ButtonGadget(#buttonEraze, imgW+30, 480, 150, 30, "Стереть")
+  ButtonGadget(#ButtonErase, imgW+30, 480, 150, 30, "Стереть")
   
   FrameGadget(#FrameAuthors, imgW+20, 520, DesktopWidth(0)-imgW-30, imgH-510, "")
   ButtonGadget(#ButtonAuthors, imgW+30, 540, 150, 30, "Авторы")
@@ -170,7 +170,6 @@ SetGadgetColor(#StringClass8, #PB_Gadget_BackColor, RGB(238, 130, 238))
 SetGadgetColor(#StringClass9, #PB_Gadget_BackColor, RGB(255, 0, 122))
 
 SetGadgetColor(#StringBackGround, #PB_Gadget_BackColor, RGB(255, 255, 255))
-
 ;}
 
  
@@ -199,9 +198,9 @@ SetGadgetColor(#StringBackGround, #PB_Gadget_BackColor, RGB(255, 255, 255))
     Timer=EventTimer()
     
 ;{ стираем изображение по нажатию на клавишу "СТЕРЕТЬ ВСЕ"   
-    If Gadget = #buttonErazeAll And Type = #PB_EventType_LeftClick And Event = #PB_Event_Gadget
+    If Gadget = #ButtonEraseAll And Type = #PB_EventType_LeftClick And Event = #PB_Event_Gadget
       If StartDrawing(CanvasOutput(#CanvasGadget))
-        FreeImage(#trgImg) : CreateImage(#trgImg,imgW, imgH, 32 | #PB_Image_Transparent)
+        FreeImage(#trgImg) : CreateImage(#trgImg,imgW, imgH, 32, #PB_Image_Transparent)
         DrawImage(ImageID(#sourceImage),0,0) ; отрисовываем
         StopDrawing()
       EndIf
@@ -291,9 +290,9 @@ EndIf
       EndIf
       
       
-      If (Gadget = #CanvasGadget And Event = #PB_Event_Gadget And Type = #PB_EventType_LeftButtonUp) Or (Gadget = #buttonErazeAll And Type = #PB_EventType_LeftClick)
+      If (Gadget = #CanvasGadget And Event = #PB_Event_Gadget And Type = #PB_EventType_LeftButtonUp) Or (Gadget = #ButtonEraseAll And Type = #PB_EventType_LeftClick)
         SaveImage(#trgImg,GetCurrentDirectory()+"maps\"+ReplaceString(GetFilePart(path),GetExtensionPart(path),"")+"map.png", #PB_ImagePlugin_PNG)
-        SquareCalc()
+        AreaCalc()
       EndIf
     EndIf
 ;}    
@@ -321,7 +320,7 @@ Select Gadget
     crclColor = RGBA(255, 0, 122, 255) : mode = #PB_2DDrawing_AlphaBlend
   Case  #ButtonBackGround
     crclColor = RGBA(255, 255, 255, 255) : mode = #PB_2DDrawing_AlphaBlend
-  Case #buttonEraze
+  Case #ButtonErase
     crclColor = $00000000: mode = #PB_2DDrawing_AllChannels
 EndSelect
 SetActiveGadget(#CanvasGadget)
@@ -341,7 +340,7 @@ If Gadget = #buttonSave And Event = #PB_Event_Gadget And Type = #PB_EventType_Le
     FileSeek(0, Lof(0))
     WriteStringN(0, path+";"+""+";"+GetGadgetText(#StringClass1)+";"+GetGadgetText(#StringClass2)+";"+GetGadgetText(#StringClass3)+";"+GetGadgetText(#StringClass4)+";"+GetGadgetText(#StringClass5)+";"+GetGadgetText(#StringClass6)+";"+GetGadgetText(#StringClass7)+";"+GetGadgetText(#StringClass8)+";"+GetGadgetText(#StringClass9))
     CloseFile(0)
-    MessageRequester("","Результаты успешно схоронены в файл "+GetCurrentDirectory()+"report.csv")
+    MessageRequester("","Результаты успешно сохранены в файл "+GetCurrentDirectory()+"report.csv")
   Else
     MessageRequester("", "А что, собственно, сохранять собираемся?")
   EndIf
@@ -373,10 +372,10 @@ Until Event=#PB_Event_CloseWindow And Window = #Window_0
 
 
 ; IDE Options = PureBasic 5.20 beta 7 (Windows - x86)
-; CursorPosition = 355
-; FirstLine = 155
-; Folding = Q9
+; CursorPosition = 152
+; FirstLine = 79
+; Folding = A5
 ; EnableXP
 ; Executable = KrystallDraw.exe
-; EnableCompileCount = 3
+; EnableCompileCount = 18
 ; EnableBuildCount = 1
