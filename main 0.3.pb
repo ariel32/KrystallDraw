@@ -118,7 +118,7 @@ EndIf
 
 
 
-If OpenWindow(#Window_0, 0, 0, 220, 220, "KrystallDraw", #PB_Window_SystemMenu | #PB_Window_Maximize); | #PB_Window_ScreenCentered)
+If OpenWindow(#Window_0, 0, 0, 220, 220, "KrystallDraw"+" v."+Str(#PB_Editor_BuildCount)+"."+Str(#PB_Editor_CompileCount), #PB_Window_SystemMenu | #PB_Window_Maximize); | #PB_Window_ScreenCentered)
   AddKeyboardShortcut(#Window_0, #PB_Shortcut_Escape, 1)
   AddKeyboardShortcut(#Window_0, #PB_Shortcut_1, 2)
   AddKeyboardShortcut(#Window_0, #PB_Shortcut_2, 3)
@@ -353,7 +353,7 @@ EndIf
 If (Gadget = #ButtonAuthors And Type = #PB_EventType_LeftClick And Event = #PB_Event_Gadget)
   msgtext = "УО "+Chr(34)+"Витебский государственный ордена Дружбы народов медицинский университет"+Chr(34)+", 2018"+Chr(10)+Chr(10)+
             "Осочук Сергей Стефанович"+Chr(10)+
-            "Яковлева Ольга Станиславна"+Chr(10)+
+            "Яковлева Ольга Святославна"+Chr(10)+
             "Марцинкевич Александр Францевич"
   MessageRequester("Информация об авторах", msgtext, #MB_ICONINFORMATION)
 EndIf
@@ -373,8 +373,10 @@ Until Event=#PB_Event_CloseWindow And Window = #Window_0
 
 
 ; IDE Options = PureBasic 5.20 beta 7 (Windows - x86)
-; CursorPosition = 240
-; FirstLine = 133
+; CursorPosition = 355
+; FirstLine = 155
 ; Folding = Q9
 ; EnableXP
-; Executable = C:\Users\Angel\Desktop\KrystallDraw.exe
+; Executable = KrystallDraw.exe
+; EnableCompileCount = 3
+; EnableBuildCount = 1
