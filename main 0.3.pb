@@ -87,15 +87,15 @@ StopDrawing()
 
 FreeImage(image_id)
 ; Debug StrF(i/(GadgetWidth(#CanvasGadget) * GadgetHeight(#CanvasGadget))*100, 4)+"%"
-SetGadgetText(#StringClass1, StrF(class1/((GadgetWidth(#CanvasGadget) * GadgetHeight(#CanvasGadget)-classBackGround))*100, 4)+"%")
-SetGadgetText(#StringClass2, StrF(class2/((GadgetWidth(#CanvasGadget) * GadgetHeight(#CanvasGadget)-classBackGround))*100, 4)+"%")
-SetGadgetText(#StringClass3, StrF(class3/((GadgetWidth(#CanvasGadget) * GadgetHeight(#CanvasGadget)-classBackGround))*100, 4)+"%")
-SetGadgetText(#StringClass4, StrF(class4/((GadgetWidth(#CanvasGadget) * GadgetHeight(#CanvasGadget)-classBackGround))*100, 4)+"%")
-SetGadgetText(#StringClass5, StrF(class5/((GadgetWidth(#CanvasGadget) * GadgetHeight(#CanvasGadget)-classBackGround))*100, 4)+"%")
-SetGadgetText(#StringClass6, StrF(class6/((GadgetWidth(#CanvasGadget) * GadgetHeight(#CanvasGadget)-classBackGround))*100, 4)+"%")
-SetGadgetText(#StringClass7, StrF(class7/((GadgetWidth(#CanvasGadget) * GadgetHeight(#CanvasGadget)-classBackGround))*100, 4)+"%")
-SetGadgetText(#StringClass8, StrF(class8/((GadgetWidth(#CanvasGadget) * GadgetHeight(#CanvasGadget)-classBackGround))*100, 4)+"%")
-SetGadgetText(#StringClass9, StrF(class9/((GadgetWidth(#CanvasGadget) * GadgetHeight(#CanvasGadget)-classBackGround))*100, 4)+"%")
+SetGadgetText(#StringClass1, StrF(class1/((GadgetWidth(#CanvasGadget) * GadgetHeight(#CanvasGadget)-classBackGround))*100, 4)+"")
+SetGadgetText(#StringClass2, StrF(class2/((GadgetWidth(#CanvasGadget) * GadgetHeight(#CanvasGadget)-classBackGround))*100, 4)+"")
+SetGadgetText(#StringClass3, StrF(class3/((GadgetWidth(#CanvasGadget) * GadgetHeight(#CanvasGadget)-classBackGround))*100, 4)+"")
+SetGadgetText(#StringClass4, StrF(class4/((GadgetWidth(#CanvasGadget) * GadgetHeight(#CanvasGadget)-classBackGround))*100, 4)+"")
+SetGadgetText(#StringClass5, StrF(class5/((GadgetWidth(#CanvasGadget) * GadgetHeight(#CanvasGadget)-classBackGround))*100, 4)+"")
+SetGadgetText(#StringClass6, StrF(class6/((GadgetWidth(#CanvasGadget) * GadgetHeight(#CanvasGadget)-classBackGround))*100, 4)+"")
+SetGadgetText(#StringClass7, StrF(class7/((GadgetWidth(#CanvasGadget) * GadgetHeight(#CanvasGadget)-classBackGround))*100, 4)+"")
+SetGadgetText(#StringClass8, StrF(class8/((GadgetWidth(#CanvasGadget) * GadgetHeight(#CanvasGadget)-classBackGround))*100, 4)+"")
+SetGadgetText(#StringClass9, StrF(class9/((GadgetWidth(#CanvasGadget) * GadgetHeight(#CanvasGadget)-classBackGround))*100, 4)+"")
 EndProcedure
 
 ExamineDesktops()
@@ -372,10 +372,10 @@ Until Event=#PB_Event_CloseWindow And Window = #Window_0
 
 
 ; IDE Options = PureBasic 5.20 beta 7 (Windows - x86)
-; CursorPosition = 152
-; FirstLine = 79
-; Folding = A5
+; CursorPosition = 97
+; FirstLine = 70
+; Folding = B7
 ; EnableXP
 ; Executable = KrystallDraw.exe
-; EnableCompileCount = 19
+; EnableCompileCount = 23
 ; EnableBuildCount = 2
