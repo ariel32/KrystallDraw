@@ -377,5 +377,5 @@ Until Event=#PB_Event_CloseWindow And Window = #Window_0
 ; Folding = B7
 ; EnableXP
 ; Executable = KrystallDraw.exe
-; EnableCompileCount = 23
-; EnableBuildCount = 2
+; EnableCompileCount = 24
+; EnableBuildCount = 3
