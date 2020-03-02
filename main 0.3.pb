@@ -130,7 +130,9 @@ If OpenWindow(#Window_0, 0, 0, 220, 220, "KrystallDraw"+" v."+Str(#PB_Editor_Bui
   AddKeyboardShortcut(#Window_0, #PB_Shortcut_8, 9)
   AddKeyboardShortcut(#Window_0, #PB_Shortcut_9, 10)
   AddKeyboardShortcut(#Window_0, #PB_Shortcut_0, 11)
-
+  AddKeyboardShortcut(#Window_0, #PB_Shortcut_O, 100)
+  AddKeyboardShortcut(#Window_0, #PB_Shortcut_S, 101)
+  AddKeyboardShortcut(#Window_0, #PB_Shortcut_D, 102)
   
   CanvasGadget(#CanvasGadget, 10, 10, imgW, imgH, #PB_Canvas_Keyboard | #PB_Canvas_Border)
   
@@ -198,7 +200,7 @@ SetGadgetColor(#StringBackGround, #PB_Gadget_BackColor, RGB(255, 255, 255))
     Timer=EventTimer()
     
 ;{ стираем изображение по нажатию на клавишу "СТЕРЕТЬ ВСЕ"   
-    If Gadget = #ButtonEraseAll And Type = #PB_EventType_LeftClick And Event = #PB_Event_Gadget
+    If (Gadget = #ButtonEraseAll And Type = #PB_EventType_LeftClick And Event = #PB_Event_Gadget And IsImage(#sourceImage)) Or (Event=#PB_Event_Menu And Window = #Window_0 And Menu = 102 And IsImage(#sourceImage))
       If StartDrawing(CanvasOutput(#CanvasGadget))
         FreeImage(#trgImg) : CreateImage(#trgImg,imgW, imgH, 32, #PB_Image_Transparent)
         DrawImage(ImageID(#sourceImage),0,0) ; отрисовываем
@@ -235,7 +237,7 @@ SetGadgetColor(#StringBackGround, #PB_Gadget_BackColor, RGB(255, 255, 255))
    ;}
    
 ;{ открываем изображение
-If (Gadget = #ButtonOpenImage And Event = #PB_Event_Gadget And Type = #PB_EventType_LeftClick) Or (Gadget = #CanvasGadget And Type = #PB_EventType_LeftClick And Event = #PB_Event_Gadget And path = "")
+If (Gadget = #ButtonOpenImage And Event = #PB_Event_Gadget And Type = #PB_EventType_LeftClick) Or (Gadget = #CanvasGadget And Type = #PB_EventType_LeftClick And Event = #PB_Event_Gadget And path = "") Or (Event=#PB_Event_Menu And Window = #Window_0 And Menu = 100)
   Pattern$ = "TIFF (*.tif) | *.tif"
   path = OpenFileRequester("Выберите изображение", GetCurrentDirectory(),Pattern$,1)
   If path <> ""
@@ -290,7 +292,7 @@ EndIf
       EndIf
       
       
-      If (Gadget = #CanvasGadget And Event = #PB_Event_Gadget And Type = #PB_EventType_LeftButtonUp) Or (Gadget = #ButtonEraseAll And Type = #PB_EventType_LeftClick)
+      If (Gadget = #CanvasGadget And Event = #PB_Event_Gadget And Type = #PB_EventType_LeftButtonUp) Or (Gadget = #ButtonEraseAll And Type = #PB_EventType_LeftClick) Or (Event=#PB_Event_Menu And Window = #Window_0 And Menu = 102)
         SaveImage(#trgImg,GetCurrentDirectory()+"maps\"+ReplaceString(GetFilePart(path),GetExtensionPart(path),"")+"map.png", #PB_ImagePlugin_PNG)
         AreaCalc()
       EndIf
@@ -329,7 +331,7 @@ EndIf
 
 ;{ сохраняем результаты
 
-If Gadget = #buttonSave And Event = #PB_Event_Gadget And Type = #PB_EventType_LeftClick
+If (Gadget = #buttonSave And Event = #PB_Event_Gadget And Type = #PB_EventType_LeftClick) Or (Event=#PB_Event_Menu And Window = #Window_0 And Menu = 101)
   If path
     If FileSize(GetCurrentDirectory()+"report.csv") = -1
       CreateFile(0, GetCurrentDirectory()+"report.csv")
@@ -372,10 +374,10 @@ Until Event=#PB_Event_CloseWindow And Window = #Window_0
 
 
 ; IDE Options = PureBasic 5.20 beta 7 (Windows - x86)
-; CursorPosition = 97
-; FirstLine = 70
-; Folding = B7
+; CursorPosition = 202
+; FirstLine = 145
+; Folding = R5
 ; EnableXP
 ; Executable = KrystallDraw.exe
-; EnableCompileCount = 24
-; EnableBuildCount = 3
+; EnableCompileCount = 35
+; EnableBuildCount = 4
